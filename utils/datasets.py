@@ -25,27 +25,28 @@ class CustomDataset(Dataset):
         image = torch.tensor(image / 255., dtype=torch.float)
         if self.transform:
             image = self.transform(image)
-        label = torch.tensor(label, dtype=torch.float)
+        label = torch.tensor(label, dtype=torch.long)
         return image, label
 
 
-def get_loader(x, y, batch_size, flag='Train'):
+def get_loader(x, y, batch_size, mean, std, flag='Train'):
     if x.shape[-1] == 3: n = 3
     else: n = 1
 
     if flag == 'Train':
         transform = transforms.Compose([
             transforms.ToPILImage(),
-            transforms.RandomHorizontalFlip(),
-            transforms.RandomRotation(10),
+            transforms.RandomAffine(degrees=10, translate=(0.1, 0.1), scale=(0.9, 1.1)),
+            transforms.RandomVerticalFlip(p=0.5),
             transforms.ToTensor(),
-            transforms.Normalize(mean=[0.5] * n, std=[0.5] * n)
+            transforms.Normalize(mean=mean, std=std),
+            # transforms.Normalize(mean=[0.568] * n, std=[0.169] * n)
         ])
     else:
         transform = transforms.Compose([
             transforms.ToPILImage(),
             transforms.ToTensor(),
-            transforms.Normalize(mean=[0.5] * n, std=[0.5] * n)
+            transforms.Normalize(mean=[mean] * n, std=[std] * n)
         ])
 
     dataset = CustomDataset(x, y, transform=transform)
