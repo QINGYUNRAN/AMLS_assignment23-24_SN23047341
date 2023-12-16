@@ -17,7 +17,7 @@ project/
 ├── A/
 │   ├── checkpoint/     
 │   ├── image_output/     
-│   ├── init.py        
+│   ├── __init__.py        
 │   ├── model.py           
 │   ├── Solution_A.py      
 │   └── Try.py            
@@ -25,7 +25,7 @@ project/
 ├── B/
 │   ├── checkpoint/      
 │   ├── image_output/     
-│   ├── init.py       
+│   ├── __init__.py       
 │   ├── model.py          
 │   └── Solution_B.py      
 │
@@ -34,7 +34,7 @@ project/
 │   └── PathMNIST/pathmnist.npz        
 │
 └── utils/
-├── init.py     
+├── __init__.py     
 ├── datasets.py       
 └── run.py            
 ```
@@ -119,7 +119,7 @@ Default values are provided for the training hyperparameters. When the `retrain_
 
 If both `retrain_flag` and `params_search` are set to `False`, the script will directly load the best-tuned model and display its accuracy on the test set.
 
-Ensure that you have best_model_A.pth and best_model_B.pth in the checkpoint directories of their respective tasks. Otherwise, you will not be able to run the following commands to verify the best accuracy obtained, and you will have to retrain the models yourself.
+Ensure that you have `best_model_A.pth` and `best_model_B.pth` in the checkpoint directories of their respective tasks. Otherwise, you will not be able to run the following commands to verify the best accuracy obtained, and you will have to retrain the models yourself.
 ```sh
 python main.py --solution A
 python main.py --solution B
