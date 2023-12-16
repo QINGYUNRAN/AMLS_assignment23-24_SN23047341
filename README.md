@@ -1,10 +1,11 @@
 # AMLS_assignment23-24_SN23047341
 
 UCL AMLS coursework by Qingyun Ran
-To access the actual content of the large file, please execute the following command:
-```sh
-git lfs pull
-```
+
+To obtain the best model files, please download them from the following link and place them in their respective checkpoint directories:
+- [Download best_model_A.pth](https://liveuclac-my.sharepoint.com/:u:/g/personal/uceeqra_ucl_ac_uk/EUK-wT4TdBBBu7V2tzwXIqMBdJYZYqn_vV0n-szI4_FUsw?e=tBx0o6)
+- [Download best_model_B.pth](https://liveuclac-my.sharepoint.com/:u:/g/personal/uceeqra_ucl_ac_uk/EWejm_369QNHmIITCG4qooUBNeqjsAzkswfgmZKJR1ZEJw?e=zpUfbV)
+
 
 ## Project Structure
 
@@ -117,13 +118,13 @@ To run `main.py`, please be aware of the following key parameters:
 Default values are provided for the training hyperparameters. When the `retrain_flag` is enabled, the model will retrain and save as `retrain_model.pth` in the task-specific `checkpoint` directory. If `params_search` is enabled, the model will undergo a comprehensive parameter search with Optuna and save the best model as `best_model.pth`, which may take an extended time to complete.
 
 If both `retrain_flag` and `params_search` are set to `False`, the script will directly load the best-tuned model and display its accuracy on the test set.
-To access the actual content of the large file, please execute the following command: `git lfs pull`, as the best model parameter file is stored using LFS.
+
+Ensure that you have best_model_A.pth and best_model_B.pth in the checkpoint directories of their respective tasks. Otherwise, you will not be able to run the following commands to verify the best accuracy obtained, and you will have to retrain the models yourself.
 ```sh
-git lfs pull
 python main.py --solution A
 python main.py --solution B
 ```
-If you wish to train the model using custom hyperparameters, specifically your own learning rate, you can run like the following command:
+Or you can just train the model using custom hyperparameters, specifically your own learning rate, you can run like the following command:
 
 ```sh
 python main.py --solution A --retrain_flag --learning_rate 0.001
