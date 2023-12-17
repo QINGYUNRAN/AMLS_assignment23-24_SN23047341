@@ -3,6 +3,26 @@ import copy
 
 
 def train(model, train_loader, val_loader, criterion, optimizer, device, num_epochs, patience, clip_value=None):
+    """
+       Trains a neural network model using given data loaders and updates the model parameters.
+
+       Args:
+           model (torch.nn.Module): The neural network model to train.
+           train_loader (DataLoader): DataLoader for the training data.
+           val_loader (DataLoader): DataLoader for the validation data.
+           criterion (function): The loss function.
+           optimizer (torch.optim.Optimizer): The optimization algorithm.
+           device (torch.device): Device to run the training on (e.g., 'cuda', 'cpu').
+           num_epochs (int): Number of epochs to train for.
+           patience (int): Patience for early stopping (number of epochs to wait after last improvement).
+           clip_value (float, optional): Max norm of the gradients; if specified, gradient clipping is applied.
+
+       Returns:
+           tuple: (model, train_loss_history, valid_loss_history)
+               model - The trained model with the best weights.
+               train_loss_history - List of training losses per epoch.
+               valid_loss_history - List of validation losses per epoch.
+       """
     train_loss_history = []
     valid_loss_history = []
     best_model_wts = copy.deepcopy(model.state_dict())
@@ -65,6 +85,19 @@ def train(model, train_loader, val_loader, criterion, optimizer, device, num_epo
 
 
 def test(model, test_loader, device):
+    """
+        Tests a trained neural network model using a test data loader.
+
+        Args:
+            model (torch.nn.Module): The trained neural network model.
+            test_loader (DataLoader): DataLoader for the test data.
+            device (torch.device): Device to run the test on (e.g., 'cuda', 'cpu').
+
+        Returns:
+            tuple: (test_accuracy, predictions)
+                test_accuracy - The accuracy of the model on the test set.
+                predictions - List of predicted labels for the test dataset.
+        """
     model.eval()
     correct = 0
     total = 0

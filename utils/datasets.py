@@ -5,7 +5,21 @@ from torchvision import transforms
 
 
 class CustomDataset(Dataset):
+    """
+        A custom dataset class for handling image datasets.
+
+        Attributes:
+            images (array): An array of images.
+            labels (array): An array of labels corresponding to the images.
+            transform (callable, optional): Optional transform to be applied on a sample.
+
+        Methods:
+            __len__: Returns the number of items in the dataset.
+            __getitem__: Retrieves an image-label pair by index with optional transformations.
+        """
+
     def __init__(self, images, labels, transform=None):
+
         self.images = images
         self.labels = labels
         self.transform = transform
@@ -30,6 +44,21 @@ class CustomDataset(Dataset):
 
 
 def get_loader(x, y, batch_size, mean, std, flag='Train'):
+    """
+        Creates and returns a DataLoader for either training or testing.
+
+        Args:
+            x (array): Input images.
+            y (array): Corresponding labels for the input images.
+            batch_size (int): Batch size for the DataLoader.
+            mean (float): Mean for normalization.
+            std (float): Standard deviation for normalization.
+            flag (str): Indicates 'Train' for training data and anything else for testing/validation data.
+
+        Returns:
+            DataLoader: A DataLoader object for iterating over the dataset.
+        """
+
     if x.shape[-1] == 3: n = 3
     else: n = 1
 
@@ -56,6 +85,15 @@ def get_loader(x, y, batch_size, mean, std, flag='Train'):
 
 
 def get_data(data):
+    """
+       Extracts and returns the training, validation, and testing datasets.
+
+       Args:
+           data (dict): A dictionary containing keys 'train_images', 'val_images', 'test_images', 'train_labels', 'val_labels', 'test_labels'.
+
+       Returns:
+           tuple: A tuple containing six elements - training images, validation images, test images, training labels, validation labels, and test labels.
+       """
     x_train = data['train_images']
     x_val = data['val_images']
     x_test = data['test_images']

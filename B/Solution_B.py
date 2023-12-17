@@ -85,7 +85,7 @@ class SolutionB:
             self.visualize_loss(self.train_loss_history, self.valid_loss_history)
         else:
             self.model.load_state_dict(
-                torch.load(os.path.join(self.checkpoint_path, "best_model.pth"), map_location=self.device))
+                torch.load(os.path.join(self.checkpoint_path, "best_model_B.pth"), map_location=self.device))
             self.best_model = self.model
             self.test_accuracy, self.predictions = test(self.best_model, self.test_loader, self.device)
             print("Test accuracy:", self.test_accuracy)
@@ -113,7 +113,7 @@ class SolutionB:
 
             val_accuracy, _ = test(best_model, val_loader, self.device)
             if trial.number == 0 or val_accuracy > trial.study.best_value:
-                torch.save(best_model.state_dict(), os.path.join(self.checkpoint_path, "best_model.pth"))
+                torch.save(best_model.state_dict(), os.path.join(self.checkpoint_path, "best_model_B.pth"))
             return val_accuracy
 
         study = optuna.create_study(direction='maximize')
