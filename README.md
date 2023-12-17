@@ -112,7 +112,7 @@ To run `main.py`, please be aware of the following key parameters:
 - `dropout_rate`: Dropout rate for the neural network.
 - `weight_decay`: Weight decay for regularization.
 - `clip_value`: Gradient clipping threshold.
-- `retrain_flag`: If `True`, retrain the model from scratch.
+- `retrain`: If `True`, retrain the model from scratch.
 - `params_search`: If `True`, execute hyperparameter optimization with Optuna.
 
 Default values are provided for the training hyperparameters. When the `retrain_flag` is enabled, the model will retrain and save as `retrain_model.pth` in the task-specific `checkpoint` directory. If `params_search` is enabled, the model will undergo a comprehensive parameter search with Optuna and save the best model as `best_model.pth`, which may take an extended time to complete.
@@ -127,11 +127,11 @@ python main.py --solution B
 Or you can just train the model using custom hyperparameters, specifically your own learning rate, you can run like the following command:
 
 ```sh
-python main.py --solution A --retrain_flag --learning_rate 0.001
+python main.py --solution A --retrain --learning_rate 0.001
 ```
 
 If you want to save time, you can directly use the default settings for training, but they may not be the optimal parameters for your chosen task.
 ```sh
-python main.py --solution A --retrain_flag
-python main.py --solution B --retrain_flag
+python main.py --solution A --retrain
+python main.py --solution B --retrain
 ```
